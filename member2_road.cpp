@@ -153,3 +153,50 @@ void lamp(float ax, float ay, float bx, float by,
     glVertex2f(ax, ay);   // pole foot cap
     glEnd();
 }
+
+void road_light() {
+    // Left-upper row: 4 lamps facing right, spaced 0.6 apart
+    for (int i = 0; i < 4; i++) {
+        float ox = i * 0.6f;
+        lamp(-1.9f+ox, 0.4f,  -1.8f+ox, 0.4f,  -1.8f+ox, 0.1f,  -1.85f+ox, 0.25f);
+    }
+    // Left-lower row: 4 lamps facing left, spaced 0.6 apart
+    for (int i = 0; i < 4; i++) {
+        float ox = -i * 0.6f;
+        lamp(-1.6f+ox, -0.4f, -1.5f+ox, -0.4f, -1.5f+ox, -0.1f, -1.55f+ox, -0.25f);
+    }
+    // Right-upper single lamp
+    lamp(1.4f,  0.4f,  1.5f,  0.4f,  1.5f,  0.1f,  1.45f,  0.25f);
+    // Right-lower single lamp
+    lamp(1.7f, -0.4f,  1.8f, -0.4f,  1.8f, -0.1f,  1.75f, -0.25f);
+    // Vertical road — bottom-left corner lamp
+    lamp(0.5f, -0.7f,  0.5f, -0.6f,  0.8f, -0.6f,  0.65f, -0.65f);
+    // Vertical road — bottom-right corner lamp
+    lamp(1.3f, -1.0f,  1.3f, -0.9f,  1.0f, -0.9f,  1.15f, -0.95f);
+    // Vertical road — top-left corner lamp
+    lamp(0.5f,  0.8f,  0.5f,  0.9f,  0.8f,  0.9f,  0.65f,  0.85f);
+    // Vertical road — top-right corner lamp
+    lamp(1.3f,  0.5f,  1.3f,  0.6f,  1.0f,  0.6f,  1.15f,  0.55f);
+}
+
+// ── Fence ─────────────────────────────────────────────────────────────────────
+
+void fence() {
+    glBegin(GL_LINES); glColor3ub(204, 0, 0);
+
+    // Top horizontal rails — left section and right section
+    glVertex2f(-2.0f, 0.6f);  glVertex2f(0.39f, 0.6f);
+    glVertex2f(-2.0f, 0.53f); glVertex2f(0.39f, 0.53f);
+    glVertex2f( 2.0f, 0.6f);  glVertex2f(1.42f, 0.6f);
+    glVertex2f( 2.0f, 0.53f); glVertex2f(1.42f, 0.53f);
+
+    // Left-section fence posts
+    float posts[] = { -1.98f, -1.5f, -1.45f, -0.85f, -0.8f, -0.4f, -0.17f, 0.37f };
+    for (float p : posts) { glVertex2f(p, 0.5f); glVertex2f(p, 0.63f); }
+
+    // Right-section dense fence posts (boys hostel boundary)
+    for (float p = 1.45f; p <= 1.96f; p += 0.05f) {
+        glVertex2f(p, 0.5f); glVertex2f(p, 0.63f);
+    }
+    glEnd();
+}
