@@ -41,3 +41,16 @@ void road_footpath() {
     glVertex2f(0.9f,  0.8f);  glVertex2f(0.9f,  0.97f);
     glVertex2f(0.9f, -0.97f); glVertex2f(0.9f, -0.8f);
     glEnd();
+
+    // Zebra crossing stripes (thick horizontal / vertical bars)
+    glLineWidth(10.0f);
+    glBegin(GL_LINES); glColor3ub(255, 255, 255);
+    for (float yy = -0.2f; yy <= 0.21f; yy += 0.1f) {
+        glVertex2f(0.2f, yy); glVertex2f(0.4f, yy);   // left crossing
+        glVertex2f(1.4f, yy); glVertex2f(1.6f, yy);   // right crossing
+    }
+    for (float xx = 0.7f; xx <= 1.11f; xx += 0.1f) {
+        glVertex2f(xx,  0.5f); glVertex2f(xx,  0.7f); // top crossing
+        glVertex2f(xx, -0.5f); glVertex2f(xx, -0.7f); // bottom crossing
+    }
+    glEnd();
