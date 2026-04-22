@@ -155,3 +155,28 @@ void update_cloud(int) {
     glutPostRedisplay();
     glutTimerFunc(50, update_cloud, 0);
 }
+
+// ── Signal Light State ────────────────────────────────────────────────────────
+
+// Signal state 1: RED for horizontal road, GREEN for vertical road
+void redgreen1() {
+    circle(0.7f,  0.1f,  0.02f, 255,  51,  51);  // red   — traffic_light1
+    circle(0.95f,-0.25f, 0.02f,   0, 255,   0);  // green — traffic_light2
+}
+
+// Signal state 2: GREEN for horizontal road, RED for vertical road
+void redgreen2() {
+    circle(0.7f,  0.0f,  0.02f,   0, 255,   0);  // green — traffic_light1
+    circle(0.95f,-0.15f, 0.02f, 255,  51,  51);  // red   — traffic_light2
+}
+
+// ── Keyboard Input Handler ────────────────────────────────────────────────────
+// F — switch from start screen to main scene
+// R — set horizontal RED / vertical GREEN  (cnt becomes non-zero)
+// G — set horizontal GREEN / vertical RED  (cnt = 0)
+void button(unsigned char key, int, int) {
+    extern void display();  // defined in main.cpp
+    if      (key == 'f') { glutDisplayFunc(display); glutPostRedisplay(); }
+    else if (key == 'r') cnt++;
+    else if (key == 'g') cnt = 0;
+}
