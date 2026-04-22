@@ -54,3 +54,39 @@ void road_footpath() {
         glVertex2f(xx, -0.5f); glVertex2f(xx, -0.7f); // bottom crossing
     }
     glEnd();
+
+     // Zebra crossing border lines (thinner framing)
+    glLineWidth(5.0f);
+    glBegin(GL_LINES); glColor3ub(255, 255, 255);
+    glVertex2f(0.2f, -0.3f); glVertex2f(0.2f,  0.3f);
+    glVertex2f(0.4f, -0.3f); glVertex2f(0.4f,  0.3f);
+    glVertex2f(0.6f,  0.5f); glVertex2f(1.2f,  0.5f);
+    glVertex2f(0.6f,  0.7f); glVertex2f(1.2f,  0.7f);
+    glVertex2f(1.4f, -0.3f); glVertex2f(1.4f,  0.3f);
+    glVertex2f(1.6f, -0.3f); glVertex2f(1.6f,  0.3f);
+    glVertex2f(0.6f, -0.5f); glVertex2f(1.2f, -0.5f);
+    glVertex2f(0.6f, -0.7f); glVertex2f(1.2f, -0.7f);
+    glEnd();
+
+    // Road border outline
+    glLineWidth(3.0f);
+    glBegin(GL_LINES); glColor3ub(102, 102, 102);
+    glVertex2f(-2.0f,  0.5f); glVertex2f( 0.4f,  0.5f);
+    glVertex2f( 0.4f,  0.5f); glVertex2f( 0.4f,  1.0f);
+    glVertex2f( 1.4f,  1.0f); glVertex2f( 1.4f,  0.5f);
+    glVertex2f( 1.4f,  0.5f); glVertex2f( 2.0f,  0.5f);
+    glVertex2f( 2.0f, -0.5f); glVertex2f( 1.4f, -0.5f);
+    glVertex2f( 1.4f, -0.5f); glVertex2f( 1.4f, -1.0f);
+    glVertex2f( 0.4f, -1.0f); glVertex2f( 0.4f, -0.5f);
+    glVertex2f( 0.4f, -0.5f); glVertex2f(-2.0f, -0.5f);
+    glColor3ub(230, 230, 230);
+    glVertex2f(-2.0f,  0.3f); glVertex2f( 0.6f,  0.3f);
+    glVertex2f( 0.6f,  0.3f); glVertex2f( 0.6f,  1.0f);
+    glVertex2f( 1.2f,  1.0f); glVertex2f( 1.2f,  0.3f);
+    glVertex2f( 1.2f,  0.3f); glVertex2f( 2.0f,  0.3f);
+    glVertex2f( 2.0f, -0.3f); glVertex2f( 1.2f, -0.3f);
+    glVertex2f( 1.2f, -0.3f); glVertex2f( 1.2f, -1.0f);
+    glVertex2f( 0.6f, -1.0f); glVertex2f( 0.6f, -0.3f);
+    glVertex2f( 0.6f, -0.3f); glVertex2f(-2.0f, -0.3f);
+    glEnd();
+}
