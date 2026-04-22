@@ -73,3 +73,85 @@ void car4() {
     drawCar(51, 102, 255);
     glPopMatrix();
 }
+
+// Cloud drifts left-to-right above the girls hostel area
+void moving_cloud() {
+    glPushMatrix();
+    glTranslatef(position_cloud, 0.0f, 0.0f);
+
+    // Base row of circles
+    circle(0.0f,  -0.38f, 0.07f,  255, 255, 255);
+    circle(0.1f,  -0.38f, 0.08f,  255, 255, 255);
+    circle(0.2f,  -0.38f, 0.07f,  255, 255, 255);
+
+    // Upper bumps
+    circle(0.05f, -0.32f, 0.065f, 255, 255, 255);
+    circle(0.15f, -0.30f, 0.07f,  255, 255, 255);
+
+    // Flat bottom fill to clean up underside
+    rect(-0.07f, -0.42f, 0.27f, -0.37f, 255, 255, 255);
+
+    glPopMatrix();
+}
+
+// ── Animation Timer Callbacks ─────────────────────────────────────────────────
+
+// Car 1: moves right when green (cnt==0), stops when red
+void update_car1(int) {
+    if (cnt == 0) {
+        speed_c1 = 0.01f;
+        if (position_c1 > 2.7f) position_c1 = -2.7f;  // wrap around
+    } else {
+        if (position_c1 > 0.0f) { speed_c1 = 0.0f; position_c1 = 0.0f; }
+    }
+    position_c1 += speed_c1;
+    glutPostRedisplay();
+    glutTimerFunc(10, update_car1, 0);
+}
+
+// Car 2: moves left when green (cnt==0), stops when red
+void update_car2(int) {
+    if (cnt == 0) {
+        speed_c2 = 0.01f;
+        if (position_c2 < -2.7f) position_c2 = 2.7f;  // wrap around
+    } else {
+        if (position_c2 < 1.8f) { speed_c2 = 0.0f; position_c2 = 1.8f; }
+    }
+    position_c2 -= speed_c2;
+    glutPostRedisplay();
+    glutTimerFunc(10, update_car2, 0);
+}
+
+// Car 3: moves upward when red (cnt!=0), stops when green
+void update_car3(int) {
+    if (cnt == 0) {
+        if (position_c3 > -0.9f) { speed_c3 = 0.0f; position_c3 = -0.9f; }
+    } else {
+        speed_c3 = 0.01f;
+        if (position_c3 > 1.7f) position_c3 = -1.7f;  // wrap around
+    }
+    position_c3 += speed_c3;
+    glutPostRedisplay();
+    glutTimerFunc(10, update_car3, 0);
+}
+
+// Car 4: moves downward when red (cnt!=0), stops when green
+void update_car4(int) {
+    if (cnt == 0) {
+        if (position_c4 < 0.9f) { speed_c4 = 0.0f; position_c4 = 0.9f; }
+    } else {
+        speed_c4 = 0.01f;
+        if (position_c4 < -1.7f) position_c4 = 1.7f;  // wrap around
+    }
+    position_c4 -= speed_c4;
+    glutPostRedisplay();
+    glutTimerFunc(10, update_car4, 0);
+}
+
+// Cloud animation: drift right, loop back when off-screen
+void update_cloud(int) {
+    position_cloud += speed_cloud;
+    if (position_cloud > 2.1f) position_cloud = 1.1f;
+    glutPostRedisplay();
+    glutTimerFunc(50, update_cloud, 0);
+}
