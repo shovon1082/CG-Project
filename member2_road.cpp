@@ -90,3 +90,47 @@ void road_footpath() {
     glVertex2f( 0.6f, -0.3f); glVertex2f(-2.0f, -0.3f);
     glEnd();
 }
+
+// ── Traffic Signal Structures ─────────────────────────────────────────────────
+
+// Draw a traffic light box with three signal circles (red / yellow / green)
+void lightBox(float bx,  float by,  float bx2, float by2,
+              float rx,  float ry,
+              float yx,  float yy,
+              float gx,  float gy) {
+    rect(bx, by, bx2, by2, 204, 122, 0);  // housing box
+    glLineWidth(3.0f);
+    glBegin(GL_LINES); glColor3ub(0, 0, 0);
+    glVertex2f(bx,  by);  glVertex2f(bx2, by);
+    glVertex2f(bx2, by);  glVertex2f(bx2, by2);
+    glVertex2f(bx2, by2); glVertex2f(bx,  by2);
+    glVertex2f(bx,  by2); glVertex2f(bx,  by);
+    glEnd();
+    circle(rx, ry, 0.02f, 204,   0,   0);   // red
+    circle(yx, yy, 0.02f, 255, 204,   0);   // yellow
+    circle(gx, gy, 0.02f,   0, 128,   0);   // green
+}
+
+// Traffic light 1 — horizontal road (top-left of intersection)
+void traffic_light1() {
+    rect(0.45f, 0.38f, 0.55f, 0.42f, 128, 0, 0);  // base block
+    glLineWidth(5.0f);
+    glBegin(GL_LINES); glColor3ub(153, 0, 0);
+    glVertex2f(0.55f, 0.4f); glVertex2f(0.7f,  0.4f);
+    glVertex2f(0.7f,  0.4f); glVertex2f(0.7f,  0.15f);
+    glEnd();
+    lightBox(0.65f, -0.05f, 0.75f, 0.15f,
+             0.7f, 0.1f,   0.7f, 0.05f,  0.7f, 0.0f);
+}
+
+// Traffic light 2 — vertical road (bottom-right of intersection)
+void traffic_light2() {
+    rect(1.28f, -0.45f, 1.32f, -0.35f, 128, 0, 0);  // base block
+    glLineWidth(5.0f);
+    glBegin(GL_LINES); glColor3ub(153, 0, 0);
+    glVertex2f(1.3f, -0.35f); glVertex2f(1.3f, -0.2f);
+    glVertex2f(1.3f, -0.2f);  glVertex2f(1.0f, -0.2f);
+    glEnd();
+    lightBox(0.9f, -0.3f, 1.0f, -0.1f,
+             0.95f, -0.15f,  0.95f, -0.2f,  0.95f, -0.25f);
+}
