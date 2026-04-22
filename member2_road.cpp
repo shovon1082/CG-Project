@@ -134,3 +134,22 @@ void traffic_light2() {
     lightBox(0.9f, -0.3f, 1.0f, -0.1f,
              0.95f, -0.15f,  0.95f, -0.2f,  0.95f, -0.25f);
 }
+
+// ── Street Lights ─────────────────────────────────────────────────────────────
+
+// Draw a single L-shaped street lamp:
+//   (ax,ay) = pole foot  →  (bx,by) = pole elbow  →  (cx,cy) = arm end
+//   (cx,cy)-(cx2,cy2)   = lamp housing rectangle
+void lamp(float ax, float ay, float bx, float by,
+          float cx, float cy, float cx2, float cy2) {
+    glLineWidth(3.0f);
+    glBegin(GL_LINES); glColor3ub(128, 128, 128);
+    glVertex2f(ax, ay); glVertex2f(bx, by);
+    glVertex2f(bx, by); glVertex2f(cx, cy);
+    glEnd();
+    rect(cx, cy, cx2, cy2, 191, 191, 191);  // lamp housing
+    glPointSize(10.0f);
+    glBegin(GL_POINTS); glColor3ub(89, 89, 89);
+    glVertex2f(ax, ay);   // pole foot cap
+    glEnd();
+}
